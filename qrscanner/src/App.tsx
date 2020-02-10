@@ -5,9 +5,13 @@ import QRReader from "react-qr-reader";
 
 const useStyles = makeStyles({
   root: {
-    minWidth: 275,
-    maxWidth: "80vw",
-    margin: "auto"
+    // minWidth: 275,
+    maxWidth: "95vw",
+    margin: "auto",
+    marginTop: "2%"
+  },
+  title: {
+    fontSize: "3em"
   }
 });
 
@@ -24,13 +28,19 @@ const App = () => {
     <CssBaseline>
       <>
         <Card className={classes.root}>
-          <Typography variant="h1" align="center" gutterBottom>
+          <Typography
+            className={classes.title}
+            variant="h1"
+            align="center"
+            gutterBottom
+          >
             Scan QR code
           </Typography>
           <QRReader
             style={{ height: "50%", width: "auto" }}
             onScan={handleScan}
             onError={handleError}
+            facingMode="user"
           />
         </Card>
       </>

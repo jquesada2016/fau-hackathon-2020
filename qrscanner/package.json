@@ -1,5 +1,6 @@
 {
   "name": "qrscanner",
+  "homepage": "https://lamp.cse.fau.edu/~jquesada2016/hackathon2020/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
