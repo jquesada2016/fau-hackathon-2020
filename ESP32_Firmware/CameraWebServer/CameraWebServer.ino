@@ -1,15 +1,9 @@
 #include "esp_camera.h"
-#include <Wire.h>
 #include <WiFi.h>
-#include "SSD1306.h"
-#include <qrcode.h>
 
 #define CAMERA_MODEL_AI_THINKER
 
 #include "camera_pins.h"
-
-SSD1306 display(0x3c, 14, 15);
-QRcode qrcode(&display);
 
 const char* ssid = "Jose's Galaxy Note10+";
 const char* password = "4077759622";
@@ -94,17 +88,9 @@ void setup() {
   Serial.print("Camera Ready! Use 'http://");
   Serial.print(WiFi.localIP());
   Serial.println("' to connect");
-
-  // Create IP address link.
-  const char* http = "http://";
-  const String local_ip = WiFi.localIP().toString();
-  const String address = http + local_ip;
-  
-  display.init();
-  qrcode.init();
-
-  // Display the address as a QR code.
-  qrcode.create(address);
 }
 
-void loop() {}
+void loop() {
+  // put your main code here, to run repeatedly:
+  delay(10000);
+}
