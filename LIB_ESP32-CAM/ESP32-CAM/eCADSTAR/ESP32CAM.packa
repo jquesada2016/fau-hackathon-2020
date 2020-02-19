@@ -1,0 +1,13 @@
+(unit MM)
+
+(package "ESP32-CAM"
+    (type UNDEF)
+    (uver 2)
+    (cuser "SamacSys")
+    (uuser "SamacSys")
+    (utime 2019-07-04-17:17:26)
+    (mountForm default
+        (footprintRef "ESP32CAM")
+        (spec "System")
+    )
+)

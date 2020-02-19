@@ -1,0 +1,197 @@
+;Proteus Design Interchange Format
+(PDIF
+ (vendor "SamacSys Limited")
+ (version 1 0)
+ (library
+  (part "ESP32-CAM"
+   (description "Modules PCBA Module RoHS")
+   (family "ANA")
+   (package "ESP32CAM")
+   (attribute "Datasheet Link" "https://datasheet.lcsc.com/szlcsc/Ai-Thinker-ESP32-CAM_C277946.pdf")
+   (attribute "Geometry.Height" "5mm")
+   (attribute "Manufacturer_Name" "Ai-Thinker")
+   (attribute "Manufacturer_Part_Number" "ESP32-CAM")
+   (attribute "Mouser Part Number" "")
+   (attribute "Mouser Price/Stock" "")
+   (attribute "RS Part Number" "")
+   (attribute "RS Price/Stock" "")
+   (gate
+    (symbol "ESP32-CAM")
+    (pin "IO4" 1 PS)
+    (pin "IO2" 2 PS)
+    (pin "IO14" 3 PS)
+    (pin "IO15" 4 PS)
+    (pin "IO13" 5 PS)
+    (pin "IO12" 6 PS)
+    (pin "GND_1" 7 PS)
+    (pin "5V" 8 PS)
+    (pin "3V3" 9 PS)
+    (pin "IO16" 10 PS)
+    (pin "IO0" 11 PS)
+    (pin "GND_2" 12 PS)
+    (pin "VCC" 13 PS)
+    (pin "U0R" 14 PS)
+    (pin "U0T" 15 PS)
+    (pin "GND_3" 16 PS)
+   )
+  )
+  (symbol "ESP32-CAM"
+   (units THOU)
+   (origin (pt 0 0))
+   (graphic
+    (stroke 10)
+    (path (pt 200 100) (pt 1000 100) (pt 1000 -800) (pt 200 -800) (pt 200 100) (closed))
+   )
+   (terminal
+    (body (symbol "PIN") (pt 0 -700) (rot 0) (mir 0) (visible true))
+    (name (pt 230 0) (rot 0) (just MIDDLE LEFT) (visible true))
+    (number (pt 140 20) (rot 0) (just BOTTOM RIGHT) (visible true)))
+   (terminal
+    (body (symbol "PIN") (pt 0 -600) (rot 0) (mir 0) (visible true))
+    (name (pt 230 0) (rot 0) (just MIDDLE LEFT) (visible true))
+    (number (pt 140 20) (rot 0) (just BOTTOM RIGHT) (visible true)))
+   (terminal
+    (body (symbol "PIN") (pt 0 -500) (rot 0) (mir 0) (visible true))
+    (name (pt 230 0) (rot 0) (just MIDDLE LEFT) (visible true))
+    (number (pt 140 20) (rot 0) (just BOTTOM RIGHT) (visible true)))
+   (terminal
+    (body (symbol "PIN") (pt 0 -400) (rot 0) (mir 0) (visible true))
+    (name (pt 230 0) (rot 0) (just MIDDLE LEFT) (visible true))
+    (number (pt 140 20) (rot 0) (just BOTTOM RIGHT) (visible true)))
+   (terminal
+    (body (symbol "PIN") (pt 0 -300) (rot 0) (mir 0) (visible true))
+    (name (pt 230 0) (rot 0) (just MIDDLE LEFT) (visible true))
+    (number (pt 140 20) (rot 0) (just BOTTOM RIGHT) (visible true)))
+   (terminal
+    (body (symbol "PIN") (pt 0 -200) (rot 0) (mir 0) (visible true))
+    (name (pt 230 0) (rot 0) (just MIDDLE LEFT) (visible true))
+    (number (pt 140 20) (rot 0) (just BOTTOM RIGHT) (visible true)))
+   (terminal
+    (body (symbol "PIN") (pt 0 -100) (rot 0) (mir 0) (visible true))
+    (name (pt 230 0) (rot 0) (just MIDDLE LEFT) (visible true))
+    (number (pt 140 20) (rot 0) (just BOTTOM RIGHT) (visible true)))
+   (terminal
+    (body (symbol "PIN") (pt 0 0) (rot 0) (mir 0) (visible true))
+    (name (pt 230 0) (rot 0) (just MIDDLE LEFT) (visible true))
+    (number (pt 140 20) (rot 0) (just BOTTOM RIGHT) (visible true)))
+   (terminal
+    (body (symbol "PIN") (pt 1200 0) (rot 0) (mir X) (visible true))
+    (name (pt 230 0) (rot 0) (just MIDDLE LEFT) (visible true))
+    (number (pt 140 20) (rot 0) (just BOTTOM RIGHT) (visible true)))
+   (terminal
+    (body (symbol "PIN") (pt 1200 -100) (rot 0) (mir X) (visible true))
+    (name (pt 230 0) (rot 0) (just MIDDLE LEFT) (visible true))
+    (number (pt 140 20) (rot 0) (just BOTTOM RIGHT) (visible true)))
+   (terminal
+    (body (symbol "PIN") (pt 1200 -200) (rot 0) (mir X) (visible true))
+    (name (pt 230 0) (rot 0) (just MIDDLE LEFT) (visible true))
+    (number (pt 140 20) (rot 0) (just BOTTOM RIGHT) (visible true)))
+   (terminal
+    (body (symbol "PIN") (pt 1200 -300) (rot 0) (mir X) (visible true))
+    (name (pt 230 0) (rot 0) (just MIDDLE LEFT) (visible true))
+    (number (pt 140 20) (rot 0) (just BOTTOM RIGHT) (visible true)))
+   (terminal
+    (body (symbol "PIN") (pt 1200 -400) (rot 0) (mir X) (visible true))
+    (name (pt 230 0) (rot 0) (just MIDDLE LEFT) (visible true))
+    (number (pt 140 20) (rot 0) (just BOTTOM RIGHT) (visible true)))
+   (terminal
+    (body (symbol "PIN") (pt 1200 -500) (rot 0) (mir X) (visible true))
+    (name (pt 230 0) (rot 0) (just MIDDLE LEFT) (visible true))
+    (number (pt 140 20) (rot 0) (just BOTTOM RIGHT) (visible true)))
+   (terminal
+    (body (symbol "PIN") (pt 1200 -600) (rot 0) (mir X) (visible true))
+    (name (pt 230 0) (rot 0) (just MIDDLE LEFT) (visible true))
+    (number (pt 140 20) (rot 0) (just BOTTOM RIGHT) (visible true)))
+   (terminal
+    (body (symbol "PIN") (pt 1200 -700) (rot 0) (mir X) (visible true))
+    (name (pt 230 0) (rot 0) (just MIDDLE LEFT) (visible true))
+    (number (pt 140 20) (rot 0) (just BOTTOM RIGHT) (visible true)))
+  )
+  (symbol "PIN"
+   (units THOU)
+   (origin (pt 0 0))
+   (graphic
+    (stroke 10)
+    (path (pt 0 0) (pt 200 0))))
+  (symbol "PINSHORT"
+   (units THOU)
+   (origin (pt 0 0))
+   (graphic
+    (stroke 10)
+    (path (pt 0 0) (pt 100 0))))
+  (package "ESP32CAM"
+   (units MM)
+   (layer TASM
+    (graphic
+     (stroke 0.2)
+     (path
+      (closed true)
+      (pt -2.07 -17.64)
+      (pt 24.93 -17.64)
+      (pt 24.93 22.36)
+      (pt -2.07 22.36)
+      (pt -2.07 -17.64))))
+   (layer TSLK
+    (graphic
+     (stroke 0.1)
+     (path
+      (closed true)
+      (pt -2.07 -17.64)
+      (pt 24.93 -17.64)
+      (pt 24.93 22.36)
+      (pt -2.07 22.36)
+      (pt -2.07 -17.64))))
+   (layer OCCA
+    (graphic
+     (stroke 0.1)
+     (path
+      (closed true)
+      (pt -3.07 -18.64)
+      (pt 25.93 -18.64)
+      (pt 25.93 23.36)
+      (pt -3.07 23.36)
+      (pt -3.07 -18.64))))
+   (leg 1 (pt 0.000 0.000) (padstack 0))
+   (leg 2 (pt 0.000 2.540) (padstack 0))
+   (leg 3 (pt 0.000 5.080) (padstack 0))
+   (leg 4 (pt 0.000 7.620) (padstack 0))
+   (leg 5 (pt 0.000 10.160) (padstack 0))
+   (leg 6 (pt 0.000 12.700) (padstack 0))
+   (leg 7 (pt 0.000 15.240) (padstack 0))
+   (leg 8 (pt 0.000 17.780) (padstack 8))
+   (leg 9 (pt 22.860 17.780) (padstack 9))
+   (leg 10 (pt 22.860 15.240) (padstack 0))
+   (leg 11 (pt 22.860 12.700) (padstack 0))
+   (leg 12 (pt 22.860 10.160) (padstack 0))
+   (leg 13 (pt 22.860 7.620) (padstack 0))
+   (leg 14 (pt 22.860 5.080) (padstack 0))
+   (leg 15 (pt 22.860 2.540) (padstack 0))
+   (leg 16 (pt 22.860 0.000) (padstack 0))
+   (padstack 0
+    (hole 1.11)
+    (plated true)
+    (pad (layer TCOP) (round 1.665))
+    (pad (layer INNER) (round 1.665))
+    (pad (layer BCOP) (round 1.665))
+   )
+   (padstack 8
+    (hole 1.11)
+    (plated true)
+    (pad (layer TCOP) (square 1.665))
+    (pad (layer INNER) (round 1.665))
+    (pad (layer BCOP) (square 1.665))
+   )
+   (padstack 9
+    (hole 1.11)
+    (plated true)
+    (pad (layer TCOP) (square 1.665))
+    (pad (layer INNER) (round 1.665))
+    (pad (layer BCOP) (square 1.665))
+   )
+   (model "ESP32-CAM.stp"
+    (euler 0 0 0)
+    (offset 0 0 0)
+   )
+  )
+ )
+)

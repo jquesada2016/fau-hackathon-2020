@@ -1,0 +1,4 @@
+(fp_lib_table
+  (lib (name KiCad)(type KiCad)(uri "C:/Users/JoseProGDP/Google Drive/Documents/Studies/FAU/Spring 2020 Semester/Hackathon/Project/symmetrical-octo-enigma/LIB_ESP32-CAM/ESP32-CAM/KiCad.pretty")(options "")(descr ""))
+  (lib (name ESP32-CAM)(type Legacy)(uri "C:/Users/JoseProGDP/Google Drive/Documents/Studies/FAU/Spring 2020 Semester/Hackathon/Project/symmetrical-octo-enigma/LIB_ESP32-CAM/ESP32-CAM/KiCad/ESP32-CAM.mod")(options "")(descr ""))
+)

@@ -1,0 +1,9 @@
+Manufacturer=Ai-Thinker
+PartNumber=ESP32-CAM
+PartCategory=Integrated Circuit
+PackageCategory=Other
+PinCount=16
+Version=1.1
+Released=2019-07-04 17:17:26
+Downloaded=2020-02-16 05:57:12
+3D=Y
