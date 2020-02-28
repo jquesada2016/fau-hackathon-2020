@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Test</title>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <h1 id="title">Welcome to IC</h1>
+    <div class="container">
+      <div class="row">
+        <div class="col s6">
+          <button
+            id="proximity"
+            class="waves-effect waves-light btn-large blue lighten-2"
+          >
+            Get closest object
+          </button>
+        </div>
+        <div class="col s6">
+          <button
+            id="recognize"
+            class="waves-effect waves-light btn-large orange"
+          >
+            Recognize object
+          </button>
+        </div>
+        <div class="row"></div>
+        <div class="row">
+          <div class="col s6">
+            <button
+              id="temp"
+              class="waves-effect waves-light btn-large pink purple lighten-2"
+            >
+              Temp in F
+            </button>
+          </div>
+          <div class="col s6">
+            <button
+              id="humidity"
+              class="waves-effect waves-light btn-large green lighten-2"
+            >
+              Humidity
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s1"></div>
+        <div class="col s10">
+          <a
+            id="panic"
+            href="tel:911"
+            class="waves-effect waves-light btn-large red darken-1"
+          >
+            Call for help
+          </a>
+        </div>
+        <div class="col s1"></div>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

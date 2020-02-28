@@ -1,85 +1,77 @@
 #include "esp_camera.h"
 #include <Wire.h>
 #include <WiFi.h>
+#include "SPIFFS.h"
+#include "ESPAsyncWebServer.h"
 #include "SSD1306.h"
 #include <qrcode.h>
 
-#define CAMERA_MODEL_AI_THINKER
+#define DHTTYPE DHT11
 
-#include "camera_pins.h"
 
-SSD1306 display(0x3c, 14, 15);
+// Define pins
+#define SELECTA0 15
+#define SELECTA1 14
+#define SELECTA2 2
+#define ENABLE 4
+#define ECHOSIGNAL 16
+#define DISPLAYCLA 12
+#define DISPLAYSDA 13
+#define DHT11 0
+
+
+// Function declerations
+void select0();
+void select1();
+void select2();
+void select3();
+void select4();
+void select5();
+void select6();
+void select7();
+
+void findClosestObject(float values[]);
+double getDistance(int sensorNumber);
+void triggerSensor();
+float getTemp();
+
+
+SSD1306 display(0x3c, DISPLAYSDA, DISPLAYCLA);
 QRcode qrcode(&display);
+AsyncWebServer server(80);
+
 
 const char* ssid = "Jose's Galaxy Note10+";
 const char* password = "4077759622";
 
-void startCameraServer();
+
+const char* file1 = "/index.html";
+const char* file2 = "/app.js";
+const char* file3 = "/styles.css";
+const char* JAVASCRIPT = "text/javascript";
+const char* CSS = "text/css";
+const char* JSON = "text/json";
+
 
 void setup() {
   Serial.begin(115200);
   Serial.setDebugOutput(true);
   Serial.println();
 
-  camera_config_t config;
-  config.ledc_channel = LEDC_CHANNEL_0;
-  config.ledc_timer = LEDC_TIMER_0;
-  config.pin_d0 = Y2_GPIO_NUM;
-  config.pin_d1 = Y3_GPIO_NUM;
-  config.pin_d2 = Y4_GPIO_NUM;
-  config.pin_d3 = Y5_GPIO_NUM;
-  config.pin_d4 = Y6_GPIO_NUM;
-  config.pin_d5 = Y7_GPIO_NUM;
-  config.pin_d6 = Y8_GPIO_NUM;
-  config.pin_d7 = Y9_GPIO_NUM;
-  config.pin_xclk = XCLK_GPIO_NUM;
-  config.pin_pclk = PCLK_GPIO_NUM;
-  config.pin_vsync = VSYNC_GPIO_NUM;
-  config.pin_href = HREF_GPIO_NUM;
-  config.pin_sscb_sda = SIOD_GPIO_NUM;
-  config.pin_sscb_scl = SIOC_GPIO_NUM;
-  config.pin_pwdn = PWDN_GPIO_NUM;
-  config.pin_reset = RESET_GPIO_NUM;
-  config.xclk_freq_hz = 20000000;
-  config.pixel_format = PIXFORMAT_JPEG;
-  //init with high specs to pre-allocate larger buffers
-  if(psramFound()){
-    config.frame_size = FRAMESIZE_UXGA;
-    config.jpeg_quality = 10;
-    config.fb_count = 2;
-  } else {
-    config.frame_size = FRAMESIZE_SVGA;
-    config.jpeg_quality = 12;
-    config.fb_count = 1;
+  // Pin mode setup
+  pinMode(SELECTA0, OUTPUT);
+  pinMode(SELECTA1, OUTPUT);
+  pinMode(SELECTA2, OUTPUT);
+  pinMode(DISPLAYSDA, OUTPUT);
+  pinMode(DISPLAYCLA, OUTPUT);
+  pinMode(ENABLE, OUTPUT);
+  pinMode(ECHOSIGNAL, INPUT);
+  pinMode(DHT11, INPUT);
+
+
+  if (!SPIFFS.begin()) {
+    Serial.println("it broke #SPIFFS");
   }
-
-#if defined(CAMERA_MODEL_ESP_EYE)
-  pinMode(13, INPUT_PULLUP);
-  pinMode(14, INPUT_PULLUP);
-#endif
-
-  // camera init
-  esp_err_t err = esp_camera_init(&config);
-  if (err != ESP_OK) {
-    Serial.printf("Camera init failed with error 0x%x", err);
-    return;
-  }
-
-  sensor_t * s = esp_camera_sensor_get();
-  //initial sensors are flipped vertically and colors are a bit saturated
-  if (s->id.PID == OV3660_PID) {
-    s->set_vflip(s, 1);//flip it back
-    s->set_brightness(s, 1);//up the blightness just a bit
-    s->set_saturation(s, -2);//lower the saturation
-  }
-  //drop down frame size for higher initial frame rate
-  s->set_framesize(s, FRAMESIZE_QVGA);
-
-#if defined(CAMERA_MODEL_M5STACK_WIDE)
-  s->set_vflip(s, 1);
-  s->set_hmirror(s, 1);
-#endif
-
   WiFi.begin(ssid, password);
 
   while (WiFi.status() != WL_CONNECTED) {
@@ -89,9 +81,7 @@ void setup() {
   Serial.println("");
   Serial.println("WiFi connected");
 
-  startCameraServer();
-
-  Serial.print("Camera Ready! Use 'http://");
+  Serial.print("WiFi Ready! Use 'http://");
   Serial.print(WiFi.localIP());
   Serial.println("' to connect");
 
@@ -99,12 +89,163 @@ void setup() {
   const char* http = "http://";
   const String local_ip = WiFi.localIP().toString();
   const String address = http + local_ip;
+
+  // Create web server routes
+  server.on("/", HTTP_GET, [](AsyncWebServerRequest *request){
+    Serial.println("Serving /");
+    request->send(SPIFFS, "/index.html", "text/html");
+  });
+  server.on(file2, HTTP_GET, [](AsyncWebServerRequest *request) {
+    Serial.println("Serving JS 1");
+    request->send(SPIFFS, file2, JAVASCRIPT);
+  });
+  server.on(file3, HTTP_GET, [](AsyncWebServerRequest *request) {
+    Serial.println("Serving JS 2");
+    request->send(SPIFFS, file3, CSS);
+  });
+  server.on("/closestProximity", HTTP_GET, [](AsyncWebServerRequest *request) {
+    Serial.println("Serving API call to /closestProximity");
+    float values[2];
+    findClosestObject(values);
+    Serial.println("Finished findClossestObject()");
+
+    String json = "{\"sensor\": " + String(values[0]) + ", \"distance\": " + String(values[1]) + "}";
+    
+    request->send(200, JSON, json);
+  });
   
-  display.init();
-  qrcode.init();
+  
+  server.begin();
+  
+  //display.init();
+  //qrcode.init();
 
   // Display the address as a QR code.
-  qrcode.create(address);
+  //qrcode.create(address);
 }
 
 void loop() {}
+
+
+// Function definitions
+void select0() {
+  digitalWrite(SELECTA0, LOW);
+  digitalWrite(SELECTA1, LOW);
+  digitalWrite(SELECTA2, LOW);
+}
+
+void select1() {
+  digitalWrite(SELECTA0, HIGH);
+  digitalWrite(SELECTA1, LOW);
+  digitalWrite(SELECTA2, LOW);
+}
+
+void select2() {
+  digitalWrite(SELECTA0, LOW);
+  digitalWrite(SELECTA1, HIGH);
+  digitalWrite(SELECTA2, LOW);
+}
+
+void select3() {
+  digitalWrite(SELECTA0, HIGH);
+  digitalWrite(SELECTA1, HIGH);
+  digitalWrite(SELECTA2, LOW);
+}
+
+void select4() {
+  digitalWrite(SELECTA0, LOW);
+  digitalWrite(SELECTA1, LOW);
+  digitalWrite(SELECTA2, HIGH);
+}
+
+void select5() {
+  digitalWrite(SELECTA0, HIGH);
+  digitalWrite(SELECTA1, LOW);
+  digitalWrite(SELECTA2, HIGH);
+}
+
+void select6() {
+  digitalWrite(SELECTA0, LOW);
+  digitalWrite(SELECTA1, HIGH);
+  digitalWrite(SELECTA2, HIGH);
+}
+
+void select7() {
+  digitalWrite(SELECTA0, HIGH);
+  digitalWrite(SELECTA1, HIGH);
+  digitalWrite(SELECTA2, HIGH);
+}
+
+void triggerSensor() {
+  digitalWrite(ENABLE, LOW);
+  delayMicroseconds(5);
+  digitalWrite(ENABLE, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(ENABLE, LOW);
+}
+
+float getTemp() {
+  return 20 + 273.15;  
+}
+
+double getDistance(int sensorNumber) {
+    switch (sensorNumber) {
+      long duration;
+      
+      case 0:
+        select0();
+        triggerSensor();
+        duration = pulseIn(ECHOSIGNAL, HIGH);
+        return (duration/2.0) * (0.00002005 * sqrt(getTemp()));
+      case 1:
+        select1();
+        triggerSensor();
+        duration = pulseIn(ECHOSIGNAL, HIGH);
+        return (duration/2.0) * (0.00002005 * sqrt(getTemp()));
+      case 2:
+        select2();
+        triggerSensor();
+        duration = pulseIn(ECHOSIGNAL, HIGH);
+        return (duration/2.0) * (0.00002005 * sqrt(getTemp()));
+      case 3:
+        select3();
+        triggerSensor();
+        duration = pulseIn(ECHOSIGNAL, HIGH);
+        return (duration/2.0) * (0.00002005 * sqrt(getTemp()));
+      case 4:
+        select4();
+        triggerSensor();
+        duration = pulseIn(ECHOSIGNAL, HIGH);
+        return (duration/2.0) * (0.00002005 * sqrt(getTemp()));
+      case 5:
+        select5();
+        triggerSensor();
+        duration = pulseIn(ECHOSIGNAL, HIGH);
+        return (duration/2.0) * (0.00002005 * sqrt(getTemp()));
+      case 6:
+        select6();
+        triggerSensor();
+        duration = pulseIn(ECHOSIGNAL, HIGH);
+        return (duration/2.0) * (0.00002005 * sqrt(getTemp()));
+      case 7:
+        select7();
+        triggerSensor();
+        duration = pulseIn(ECHOSIGNAL, HIGH);
+        return (duration/2.0) * (0.00002005 * sqrt(getTemp()));
+      default:
+        Serial.println("Error, you suck. The switch statement failed.");
+        
+    }
+}
+
+void findClosestObject(float values[]) {
+  float distance = 9999999;
+  for (int i = 0; i < 8; i++) {
+    float current_distance = getDistance(i);
+    if (current_distance < distance) {
+      distance = current_distance;
+      values[0] = i;
+      values[1] = distance;
+    }
+  }
+}
