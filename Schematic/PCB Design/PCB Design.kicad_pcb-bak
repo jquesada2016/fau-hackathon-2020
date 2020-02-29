@@ -3,7 +3,7 @@
   (general
     (thickness 1.6)
     (drawings 5)
-    (tracks 194)
+    (tracks 200)
     (zones 0)
     (modules 12)
     (nets 48)
@@ -60,7 +60,7 @@
     (pad_to_mask_clearance 0.051)
     (solder_mask_min_width 0.25)
     (aux_axis_origin 0 0)
-    (visible_elements 7FFFFFFF)
+    (visible_elements 7FFFF7FF)
     (pcbplotparams
       (layerselection 0x010fc_ffffffff)
       (usegerberextensions false)
@@ -697,6 +697,12 @@
   (segment (start 149.395281 108.295541) (end 149.395281 108.247281) (width 0.635) (layer B.Cu) (net 1))
   (segment (start 150.19528 109.09554) (end 149.395281 108.295541) (width 0.635) (layer B.Cu) (net 1))
   (segment (start 149.395281 108.247281) (end 148.844 107.696) (width 0.635) (layer B.Cu) (net 1))
+  (segment (start 157.835601 88.833959) (end 158.5976 88.07196) (width 0.635) (layer B.Cu) (net 1))
+  (segment (start 156.725521 89.944039) (end 157.835601 88.833959) (width 0.635) (layer B.Cu) (net 1))
+  (segment (start 147.037961 89.944039) (end 156.725521 89.944039) (width 0.635) (layer B.Cu) (net 1))
+  (segment (start 146.05 90.932) (end 147.037961 89.944039) (width 0.635) (layer B.Cu) (net 1))
+  (segment (start 146.05 104.95026) (end 146.05 90.932) (width 0.635) (layer B.Cu) (net 1))
+  (segment (start 150.19528 109.09554) (end 146.05 104.95026) (width 0.635) (layer B.Cu) (net 1))
   (segment (start 182.118 95.25) (end 182.245 95.377) (width 0.635) (layer B.Cu) (net 2) (status 30))
   (segment (start 177.673 95.25) (end 182.118 95.25) (width 0.635) (layer B.Cu) (net 2) (status 30))
   (segment (start 177.8 100.203) (end 177.673 100.33) (width 0.635) (layer F.Cu) (net 3) (status 30))
@@ -892,7 +898,7 @@
   (zone (net 1) (net_name GND) (layer B.Cu) (tstamp 0) (hatch edge 0.508)
     (connect_pads yes (clearance 0.381))
     (min_thickness 0.254)
-    (fill yes (arc_segments 32) (thermal_gap 0.508) (thermal_bridge_width 0.508))
+    (fill yes (arc_segments 32) (thermal_gap 0.381) (thermal_bridge_width 0.508))
     (polygon
       (pts
         (xy 183.388 86.106) (xy 127.508 86.868) (xy 127.508 144.526) (xy 183.388 144.78)
